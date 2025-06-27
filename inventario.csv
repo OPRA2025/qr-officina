@@ -1,0 +1,7 @@
+produttore,diametro,materiale,descrizione,codice,quantita,cassetto,stato,operatore,quantita_disponibile,operatori,storico,tipo
+BFT,16,ALLUMINIO,FRESA,65106,0,,esaurito,filippo,0,,,
+dd,5,tt,rr,rr,1,,in uso,,1,filippo:1,2025-06-23 18:42:10:: filippo:: PRELIEVO 1,
+ceratizi,16,alliuminio,fresa,564146,4,1.0,in uso,,1,cristian:2;gi:1,2025-06-23 18:16:47:: filippo:: PRELIEVO 1 (disp: 4)||2025-06-23 18:16:54:: cristian:: PRELIEVO 2 (disp: 2)||2025-06-23 18:18:06:: filippo:: RESTITUZIONE 1 (rotta) (disp: 2)||2025-06-24 15:52:09:: gi:: PRELIEVO 1,
+bft,10,alluminio,fres,5444464,6,3.0,in magazzino,,6,,2025-06-25 14:42:31:: filippo:: PRELIEVO 1||2025-06-25 14:43:03:: filippo:: RESTITUZIONE 1 (in magazzino),
+BFT,5,1,afa,56511,2,3.0,in magazzino,,2,,,
+BFT,10,INOX,FRESA A CANDELA,544516186,5,1.0,in magazzino,,5,,,MDI

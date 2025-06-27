@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Restituisci Utensile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container py-4">
+    <h1>Restituisci Utensile: {{ codice }}</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="operatore" class="form-label">Nome operatore</label>
+            <input type="text" id="operatore" name="operatore" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="quantita_restituita" class="form-label">Quantità da restituire (max: {{ max_qta }})</label>
+            <input type="number" id="quantita_restituita" name="quantita_restituita" class="form-control" min="1" max="{{ max_qta }}" required />
+        </div>
+        <div class="mb-3">
+            <label for="stato" class="form-label">Stato restituzione</label>
+            <select id="stato" name="stato" class="form-select" required>
+                <option value="in magazzino" selected>In magazzino</option>
+                <option value="rotta">Rotta / Scartata</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Restituisci</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary ms-2">Annulla</a>
+    </form>
+</div>
+</body>
+</html>

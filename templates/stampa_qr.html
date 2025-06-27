@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<title>Stampa QR Code - {{ codice }}</title>
+<style>
+    body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
+    img { width: 300px; height: 300px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+    <h1>QR Code per: {{ codice }}</h1>
+    <img src="{{ url_for('static', filename=qr_file) }}" alt="QR Code {{ codice }}" />
+    <br />
+    <button onclick="window.print()">Stampa</button>
+</body>
+</html>

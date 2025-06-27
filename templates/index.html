@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inventario Utensili</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      .qr-small {
+        width: 60px;
+        height: 60px;
+      }
+    </style>
+</head>
+<body>
+<div class="container py-4">
+    <h1>Inventario Utensili</h1>
+
+    <!-- FORM RICERCA -->
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-md-2">
+            <input type="text" name="produttore" class="form-control" placeholder="Produttore" value="{{ ricerca_produttore }}">
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="diametro" class="form-control" placeholder="Diametro" value="{{ ricerca_diametro }}">
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="materiale" class="form-control" placeholder="Materiale" value="{{ ricerca_materiale }}">
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="tipo" class="form-control" placeholder="Tipo" value="{{ ricerca_tipo }}">
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="descrizione" class="form-control" placeholder="Descrizione" value="{{ ricerca_descrizione }}">
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="codice" class="form-control" placeholder="Codice" value="{{ ricerca_codice }}">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Cerca</button>
+        </div>
+        <div class="col-auto">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Pulisci</a>
+        </div>
+    </form>
+    <!-- FINE FORM RICERCA -->
+
+    <div class="mb-3">
+        <a href="{{ url_for('inserisci') }}" class="btn btn-success">Inserisci Nuovo Utensile</a>
+        <a href="{{ url_for('etichette') }}" class="btn btn-primary ms-2">Stampa Tutte le Etichette</a>
+    </div>
+
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>QR</th>
+            <th>Produttore</th>
+            <th>Diametro</th>
+            <th>Materiale</th>
+            <th>Tipo</th>
+            <th>Descrizione</th>
+            <th>Codice</th>
+            <th>Quantità Totale</th>
+            <th>Disponibili</th>
+            <th>In Uso (Operatore: Qta)</th>
+            <th>Azioni</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for u in utensils %}
+        <tr>
+            <td>
+                {% if u.qr_img %}
+                    <img src="{{ u.qr_img }}" alt="QR Code" class="qr-small"/>
+                {% else %}
+                    ---
+                {% endif %}
+            </td>
+            <td>{{ u.produttore }}</td>
+            <td>{{ u.diametro }}</td>
+            <td>{{ u.materiale }}</td>
+            <td>{{ u.tipo }}</td>
+            <td>{{ u.descrizione }}</td>
+            <td>{{ u.codice }}</td>
+            <td>{{ u.quantita }}</td>
+            <td>{{ u.quantita_disponibile }}</td>
+            <td>{{ u.operatori_formattati }}</td>
+            <td>
+                <a href="{{ url_for('utensile', codice=u.codice) }}" class="btn btn-info btn-sm mb-1 w-100">Dettagli</a>
+                <a href="{{ url_for('preleva', codice=u.codice) }}" class="btn btn-warning btn-sm mb-1 w-100">Preleva</a>
+                <a href="{{ url_for('restituisci', codice=u.codice) }}" class="btn btn-success btn-sm mb-1 w-100">Restituisci</a>
+                <form action="{{ url_for('cancella', codice=u.codice) }}" method="post" style="display:inline-block; width:100%;">
+                    <button type="submit" class="btn btn-danger btn-sm w-100" onclick="return confirm('Confermi cancellazione utensile {{ u.codice }}?');">Cancella</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="11" class="text-center">Nessun utensile in inventario</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

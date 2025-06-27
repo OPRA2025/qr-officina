@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Stampa Etichette QR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        @media print {
+            body { margin: 0; }
+            .etichetta { page-break-inside: avoid; float: left; }
+            button { display: none; }
+        }
+        .etichetta {
+            display: inline-block;
+            width: 180px;
+            height: 220px;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        .qr-large {
+            width: 120px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-4">
+    <h1>Etichette QR Utensili</h1>
+    <button onclick="window.print()" class="btn btn-primary mb-3">Stampa tutte le etichette</button>
+    <div>
+        {% for u in utensils %}
+            {% for i in range(u.quantita|int) %}
+            <div class="etichetta">
+                <img src="{{ url_for('static', filename='qr/' + u.codice + '.png') }}" alt="QR Code" class="qr-large"/>
+                <div><strong>{{ u.descrizione }}</strong></div>
+                <div>Codice: {{ u.codice }}</div>
+                <div>Tipo: {{ u.tipo }}</div>
+                <div>Cassetto: {{ u.cassetto }}</div>
+            </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Torna all'inventario</a>
+</div>
+</body>
+</html>
